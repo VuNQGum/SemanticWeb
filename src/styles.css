@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.button-primary {
+  background: #313193 !important;
+}
+
+.button-red {
+  background: #dc2626 !important;
+}
+
+.button-green {
+  background: #218721 !important;
+}
+
+.button-blue {
+  background: #2196f3 !important;
+}
+
+.button-black {
+  background: #1e293b !important;
+}
+
+.button-warn {
+  background: rgb(214, 141, 4) !important;
+}
+
+.button-none {
+  border: 1px solid #D9D9D9 !important;
+}

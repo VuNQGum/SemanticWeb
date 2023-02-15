@@ -1,0 +1,81 @@
+<p-toast></p-toast>
+<div class="inset-0 flex flex-col min-w-0 bg-gray-100">
+  <div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden bg-gray-100">
+    <!-- Header -->
+    <div
+      class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between sm:pt-1 py-1 px-1 border-b bg-white dark:bg-transparent">
+      <div class="flex flex-row bg-white dark:bg-transparent">
+        <!-- Back button -->
+        <button pButton type="button" icon="pi pi-arrow-left" class="p-button-text" (click)="onBackToList()"></button>
+        <div class="flex ml-2 text-lg items-center font-medium">
+          Tạo mới bộ phim
+        </div>
+      </div>
+
+      <div class="flex flex-row space-x-2">
+        <button pButton type="button" label="Lưu" icon="pi pi-save" class="p-button-info" (click)="save()"></button>
+      </div>
+    </div>
+
+    <!-- body -->
+    <div class="flex-auto sm:p-3 overflow-y-auto bg-card bg-gray-100  space-y-2" cdkScrollable>
+      <div class="border-1 border-gray-300 rounded bg-white p-4 space-y-4 w-4/5  ml-auto mr-auto">
+        <div class="flex flex-col space-y-4">
+          <div class="flex items-center w-full md:w-auto space-x-3">
+            <div class="fuse-mat-no-subscript w-1/2">
+              <div class="font-bold mat-field-label">Tên bộ phim</div>
+              <input type="text" pInputText class="w-full" [(ngModel)]="model.title" />
+            </div>
+
+            <div class="fuse-mat-no-subscript w-1/2">
+              <div class="font-bold mat-field-label">Ngày phát hành</div>
+              <p-calendar [style]="{'width':'100%'}" [(ngModel)]="model.releaseDate"  dateFormat="dd/mm/yy"
+              [readonlyInput]="true" inputId="tupicker"></p-calendar>
+            </div>
+          </div>
+
+          <div class="flex items-center w-full md:w-auto space-x-3">
+            <div class="fuse-mat-no-subscript w-full">
+              <div class="font-bold mat-field-label">Điểm đánh giá IMBD</div>
+              <p-inputNumber [style]="{'width':'100%'}" [(ngModel)]="model.imbd" mode="decimal" [min]="0" [max]="10" [maxFractionDigits]="1" />
+            </div>
+          </div>
+
+          <div class="flex items-center w-full md:w-auto space-x-3">
+            <div class="fuse-mat-no-subscript w-1/2">
+              <div class="font-bold mat-field-label">Thể loại</div>
+              <p-multiSelect [style]="{'width':'100%'}" [options]="listTheLoai" [(ngModel)]="model.genre" defaultLabel="Chọn thể loại" [virtualScroll]="true" [virtualScrollItemSize]="43"  optionLabel="name" optionValue="value" [filter]="true" filterBy="name" [showToggleAll]="false"></p-multiSelect>
+            </div>
+
+            <div class="fuse-mat-no-subscript w-1/2">
+              <div class="font-bold mat-field-label">Ngôn ngữ</div>
+              <p-multiSelect [style]="{'width':'100%'}" [options]="listNgonNgu" [(ngModel)]="model.language" defaultLabel="Chọn ngôn ngữ" [virtualScroll]="true" [virtualScrollItemSize]="43"  optionLabel="name" optionValue="value" [filter]="true" filterBy="name" [showToggleAll]="false"></p-multiSelect>
+            </div>
+          </div>
+
+          <div class="flex items-center w-full md:w-auto space-x-3">
+            <div class="fuse-mat-no-subscript w-full">
+              <div class="font-bold mat-field-label">Đạo diễn</div>
+              <p-multiSelect [style]="{'width':'100%'}" [options]="listDaoDien" [(ngModel)]="model.director" defaultLabel="Chọn đạo diễn" [virtualScroll]="true" [virtualScrollItemSize]="43"  optionLabel="name" optionValue="value" [filter]="true" filterBy="name" [showToggleAll]="false"></p-multiSelect>
+            </div>
+          </div>
+
+          <div class="flex items-center w-full md:w-auto space-x-3">
+            <div class="flex flex-col fuse-mat-no-subscript w-full">
+              <div class="font-bold mat-field-label">Diễn viên</div>
+              <p-multiSelect [style]="{'width':'100%'}" [options]="listDienVien" [(ngModel)]="model.actor" defaultLabel="Chọn diễn viên" [virtualScroll]="true" [virtualScrollItemSize]="43"  optionLabel="name" optionValue="value" [filter]="true" filterBy="name" [showToggleAll]="false"></p-multiSelect>
+            </div>
+          </div>
+
+          <div class="flex items-center w-full md:w-auto">
+            <div class="w-full">
+              <div class="font-bold mat-field-label">Tóm tắt phim</div>
+                <textarea pInputTextarea class="w-full" placeholder="" value="" [(ngModel)]="model.plot"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="inset-0 flex flex-col min-w-0 bg-gray-100">
+  <div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden bg-gray-100">
+    <!-- Header -->
+    <div
+      class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between sm:pt-1 py-1 px-1 border-b bg-white dark:bg-transparent">
+      <div class="flex flex-row bg-white dark:bg-transparent">
+        <!-- Back button -->
+        <button pButton type="button" icon="pi pi-arrow-left" class="p-button-text" (click)="onBackToList()"></button>
+        <div class="flex ml-2 text-lg items-center font-medium">
+          Thông tin tìm kiếm
+        </div>
+      </div>
+
+      <div class="flex flex-row space-x-2">
+        <input type="text" pInputText class="" [(ngModel)]="model" placeholder="Nhập tên tài nguyên" />
+        <button pButton type="button" label="Tìm kiếm" icon="pi pi-search" class="p-button-info"
+          (click)="onReasoner()"></button>
+      </div>
+    </div>
+
+    <!-- body -->
+    <div class="flex-auto sm:p-3 overflow-y-auto bg-card bg-gray-100  space-y-2" cdkScrollable>
+      <div class="border-1 border-gray-300 rounded bg-white p-4 space-y-4 w-4/5  ml-auto mr-auto">
+        <div class="flex flex-col space-y-4">
+          <!-- <div>{{data}}</div> -->
+          <ng-container *ngIf="text.length > 8; else elseBlock">
+            <div *ngFor="let i of text">
+              <div>{{i}}</div>
+
+            </div>
+          </ng-container>
+          <ng-template #elseBlock>
+            <div>Không có thông tin về tài nguyên</div>
+          </ng-template>
+        </div>
+      </div>
+    </div>

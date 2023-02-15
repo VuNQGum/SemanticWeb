@@ -1,0 +1,96 @@
+<div class="inset-0 flex flex-col min-w-0 bg-gray-100">
+  <div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden bg-gray-100">
+    <!-- Header -->
+    <div
+      class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between sm:pt-1 py-1 px-1 border-b bg-white dark:bg-transparent">
+      <div class="flex flex-row bg-white dark:bg-transparent">
+        <!-- Back button -->
+        <button pButton type="button" icon="pi pi-arrow-left" class="p-button-text" (click)="onBackToList()"></button>
+        <div class="flex ml-2 text-lg items-center font-medium">
+          Thông tin bộ phim
+        </div>
+      </div>
+
+      <div class="flex flex-row space-x-2">
+        <button pButton type="button" label="Tạo mới" icon="pi pi-plus" class="p-button-info"></button>
+      </div>
+    </div>
+
+    <!-- body -->
+    <div class="flex-auto sm:p-3 overflow-y-auto bg-card bg-gray-100 space-y-2" cdkScrollable>
+      <div class="border-1 border-gray-300 rounded bg-white p-4 space-y-4 w-full  ml-auto mr-auto">
+        <div class="flex">
+          <div class="flex items-center w-1/2">
+            <div class="flex flex-auto items-center fuse-mat-no-subscript w-full">
+              <div class="font-bold mat-field-label w-1/4">Tên bộ phim</div>
+              <div>{{detailTitle}}</div>
+            </div>
+          </div>
+          <div class="flex items-center w-1/2">
+            <div class="flex flex-auto items-center fuse-mat-no-subscript w-full">
+              <div class="font-bold mat-field-label w-1/4">Ngày phát hành</div>
+
+              <div><ng-container *ngIf="data.f?.value.length < 12">{{ data.f?.value }}</ng-container></div>
+            </div>
+          </div>
+
+        </div>
+        <div class="flex">
+          <div class="flex items-center w-1/2">
+            <div class="flex flex-auto items-center fuse-mat-no-subscript w-full">
+              <div class="font-bold mat-field-label w-1/4">Điểm đánh giá IMBD</div>
+              <div>{{data.e?.value}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="flex">
+          <div class="flex items-center w-1/2">
+            <div class="flex flex-auto items-center fuse-mat-no-subscript w-full">
+              <div class="font-bold mat-field-label w-1/4">Thể loại</div>
+              <div *ngFor="let item of genres; index as i">
+                {{item}}<span *ngIf="i != (genres.length-1)">,&nbsp;</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center w-1/2">
+            <div class="flex flex-auto items-center fuse-mat-no-subscript w-full">
+              <div class="font-bold mat-field-label w-1/4">Ngôn ngữ</div>
+              <div *ngFor="let item of languages; index as i">
+                {{item}}<span *ngIf="i != (languages.length-1)">,&nbsp;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex">
+          <div class="flex items-center w-1/2">
+            <div class="flex flex-auto items-center fuse-mat-no-subscript w-full">
+              <div class="font-bold mat-field-label w-1/4">Đạo diễn</div>
+              <div *ngFor="let item of director; index as i">
+                {{item}}<span *ngIf="i != (director.length-1)">,&nbsp;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex">
+          <div class="flex items-center w-1/2">
+            <div class="flex flex-auto items-center fuse-mat-no-subscript w-full">
+              <div class="font-bold mat-field-label w-1/4">Diễn viên</div>
+              <div *ngFor="let item of actors; index as i">
+                {{item}}<span *ngIf="i != (actors.length-1)">,&nbsp;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex">
+          <div class="flex items-center w-full">
+            <div class="flex flex-col items-center fuse-mat-no-subscript w-full">
+              <div class="font-bold mat-field-label w-full">Tóm tắt:</div>
+              <div class="w-full ml-10">{{data.g?.value}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
