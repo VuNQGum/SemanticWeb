@@ -24,12 +24,14 @@ export class AppComponent implements OnInit {
 
   detail: boolean = false;
   detailTitle: string = '';
+  resource: string = '';
 
   createFilm: boolean = false;
 
   findings: boolean = false;
 
   reasoner: boolean = false;
+
 
   constructor(
     private http: CommonApiService,
@@ -39,7 +41,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.load();
-    this.loadScript();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -48,26 +49,6 @@ export class AppComponent implements OnInit {
     this.hightOff = window.innerHeight;
     console.log(this.hightOff);
 
-  }
-
-  loadScript() {
-    let node = document.createElement('script'); // creates the script tag
-    node.innerHTML = '{"@context": "https://schema.org/",' +
-    '"@type": "Recipe",' +
-    '"name": "Party Coffee Cake",' +
-    '"author": {' +
-      '"@type": "Person",' +
-      '"name": "Mary Stone"' +
-    '},' +
-    '"datePublished": "2018-03-10",' +
-    '"description": "This coffee cake is awesome and perfect for parties.",' +
-    '"prepTime": "PT20M"}'
-    node.src = ''; // sets the source (insert url in between quotes)'
-    node.type = 'application/ld+json'; // set the script type
-    node.async = true; // makes script run asynchronously
-    node.charset = 'utf-8';
-    // append to head of document
-    document.getElementsByTagName('head')[0].appendChild(node);
   }
 
   load() {
@@ -94,6 +75,9 @@ export class AppComponent implements OnInit {
     this.findings = false;
     this.reasoner = false;
     this.detailTitle = title;
+    this.resource = title.replaceAll(' ', '_');
+    console.log(this.resource);
+
   }
 
   onUpdateInfo(title: string) {

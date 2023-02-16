@@ -25,6 +25,7 @@ import {ToastModule} from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { FindingsComponent } from './pages/findings/findings.component';
 import { RuleengineComponent } from './pages/ruleengine/ruleengine.component';
+import {AccordionModule} from 'primeng/accordion';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { RuleengineComponent } from './pages/ruleengine/ruleengine.component';
     InputTextModule,
     MultiSelectModule,
     InputNumberModule,
-    ToastModule
+    ToastModule,
+    AccordionModule
   ],
   providers: [DatePipe, MessageService],
   bootstrap: [AppComponent]

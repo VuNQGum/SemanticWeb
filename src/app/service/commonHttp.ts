@@ -13,7 +13,7 @@ export class CommonApiService {
 
     onGetQuery= (query: string, url: string, showError: boolean = false): Observable<any> => {
       return this.http.get<MODEL>(url,
-        { params: new HttpParams().set('query', query), })
+        { params: new HttpParams().set('query', query)})
         .pipe(
           catchError((eror) => {
             if (eror.status === 403) {
@@ -98,3 +98,5 @@ export class CommonApiService {
         );
     }
 }
+
+// , headers: new HttpHeaders().set("accept", "application/ld+json")

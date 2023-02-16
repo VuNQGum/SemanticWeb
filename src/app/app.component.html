@@ -114,7 +114,7 @@
   </div>
 </ng-container>
 <ng-template #add>
-  <ng-container *ngIf="detail"><app-filmdetail [detailTitle]="detailTitle" (detail_back)="detailBack()" /></ng-container>
+  <ng-container *ngIf="detail"><app-filmdetail [resource]="resource" [detailTitle]="detailTitle" (detail_back)="detailBack()" /></ng-container>
   <ng-container *ngIf="createFilm"><app-createfilm (create_back)="createBack()"></app-createfilm></ng-container>
   <ng-container *ngIf="findings"><app-findings (findings_back)="findingsBack()"></app-findings></ng-container>
   <ng-container *ngIf="reasoner"><app-ruleengine (rule_back)="reasonerBack()"></app-ruleengine></ng-container>

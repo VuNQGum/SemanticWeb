@@ -21,7 +21,10 @@ export class RuleengineComponent {
     'PREFIX : <http://example/> '
 
   data: any;
-  text: string[]=[];
+  costar: string[] = [];
+  participateProductionReleaseWith: string[] = [];
+  coProduction: string[] = [];
+  coProductionRelease: string[] = [];
   model: string = '';
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
@@ -37,10 +40,12 @@ export class RuleengineComponent {
 
   onReasoner() {
     const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-    this.http.get('http://localhost:8080/rule/ruleengine', { headers, responseType: 'text'}).subscribe((res) => {
+    this.http.get<any>('http://localhost:8080/rule/ruleengine').subscribe((res) => {
       this.data = res;
-      console.log(this.data);
-      this.text = res.split('.');
+      this.costar = res.costar.split('.');
+      this.participateProductionReleaseWith = res.participateProductionReleaseWith.split('.');
+      this.coProduction = res.coProduction.split('.');
+      this.coProductionRelease = res.coProductionRelease.split('.');
     })
   }
 

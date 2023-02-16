@@ -23,6 +23,7 @@ export class FindingsComponent implements OnInit{
   data: any;
   text: string[]=[];
   model: string = '';
+  jsonld: string = '';
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
     constructor(
@@ -34,19 +35,31 @@ export class FindingsComponent implements OnInit{
     ) { }
   ngOnInit() {
     this.http.onDescribe(this.prefix +
-      ' DESCRIBE :Love_Without_Pity', 'http://localhost:3030/SemanticWeb/').subscribe((res) => {
+      ' DESCRIBE :Love_Without_Pity', 'http://localhost:3030/SemanticWeb').subscribe((res) => {
         this.data = res.data;
         console.log(this.data.error.text);
         if (res !== null) this.text = this.data.error.text.split('\n');
+        this.HTTP.get<any>('http://localhost:8080/rule/convert?turtle=' + this.onXuli(this.text)).subscribe((res) => {
+          this.jsonld = res;
+          console.log(JSON.stringify(this.jsonld));
+
+        })
       })
   }
 
   onFinding() {
     this.http.onDescribe(this.prefix +
-      ' DESCRIBE :' + this.model, 'http://localhost:3030/SemanticWeb/').subscribe((res) => {
+      ' DESCRIBE :' + this.model, 'http://localhost:3030/SemanticWeb').subscribe((res) => {
         this.data = res.data;
         console.log(this.data.error.text);
-        this.text = this.data.error.text.split('\n');
+        if (res !== null) {
+          this.text = this.data.error.text.split('\n');
+          this.HTTP.get<any>('http://localhost:8080/rule/convert?turtle=' + this.onXuli(this.text)).subscribe((res) => {
+            this.jsonld = res;
+            console.log(JSON.stringify(this.jsonld));
+
+          })
+        }
       })
 
       // const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8').set('response-type', 'text');
@@ -56,6 +69,32 @@ export class FindingsComponent implements OnInit{
       //     console.log(res);
 
       //   })
+  }
+
+  loadScript(jsonld: string) {
+    let node = document.createElement('script'); // creates the script tag
+    node.innerHTML = jsonld;
+    node.src = ''; // sets the source (insert url in between quotes)'
+    node.type = 'application/ld+json'; // set the script type
+    node.async = true; // makes script run asynchronously
+    node.charset = 'utf-8';
+    node.id = "jsonld"
+    // append to head of document
+    document.getElementsByTagName('head')[0].appendChild(node);
+  }
+
+  deleteScript() {
+    let node = document.getElementById("jsonld");
+    node?.remove();
+  }
+
+  onXuli(turtle: string[]) {
+    let text = turtle;
+    text.splice(0, 7);
+    let result = text.join(' ');
+    console.log(result);
+
+    return result;
   }
 
   onBackToList() {
